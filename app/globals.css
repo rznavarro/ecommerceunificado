@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Tokens de marca Purpuratta (fuente única: estas variables).
+   Tailwind v4 lee los tokens desde @theme (equivale a tailwind.config).
+   ------------------------------------------------------------------ */
+:root {
+  --marfil: #f7f2ec;
+  --crema: #efe6da;
+  --camel: #c8a27c;
+  --dorado: #b8925a;
+  /* Variante de dorado para TEXTO sobre marfil/crema (WCAG AA ≥ 4.5:1).
+     --dorado (2.6:1) se reserva para líneas, bordes e íconos. */
+  --dorado-texto: #7d5f33;
+  --cafe: #3b2a22;
+  --negro: #1c1a18;
+  --ciruela: #6b3a5b;
+  --linea: rgba(59, 42, 34, 0.14);
+
+  --topbar-h: 36px;
+  --header-h: 64px;
+  --chrome-h: calc(var(--topbar-h) + var(--header-h));
+  --gutter: 20px;
+  --float-offset: 0px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 76px;
+    --gutter: 40px;
+  }
+}
+
+@theme inline {
+  --color-marfil: var(--marfil);
+  --color-crema: var(--crema);
+  --color-camel: var(--camel);
+  --color-dorado: var(--dorado);
+  --color-dorado-texto: var(--dorado-texto);
+  --color-cafe: var(--cafe);
+  --color-negro: var(--negro);
+  --color-ciruela: var(--ciruela);
+  --color-linea: var(--linea);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), "Times New Roman", serif;
+
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+}
+
+/* ------------------------------------------------------------------ */
+
+@layer base {
+html {
+  background: var(--marfil);
+  color: var(--cafe);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--marfil);
+  color: var(--cafe);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+::selection {
+  background: var(--camel);
+  color: var(--negro);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ciruela);
+  outline-offset: 3px;
+}
+
+  input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+}
+
+@layer components {
+  /* Etiquetas en mayúsculas (Inter 11–12px, .14em) */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  @media (min-width: 768px) {
+    .label {
+      font-size: 12px;
+    }
+  }
+
+  .display-h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.05;
+    color: var(--negro);
+    letter-spacing: -0.01em;
+  }
+
+  .display-hero {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(44px, 7vw, 104px);
+    line-height: 1.02;
+    color: var(--negro);
+    letter-spacing: -0.015em;
+  }
+
+  .section-y {
+    padding-block: clamp(96px, 12vw, 180px);
+  }
+
+  .container-site {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Botón principal: sólido café, esquina superior derecha cortada */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 48px;
+    padding: 0 28px;
+    background: var(--cafe);
+    color: var(--marfil);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    transition: background-color 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: var(--negro);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Botón secundario "vidrio" */
+  .btn-glass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 48px;
+    padding: 0 26px;
+    background: rgba(247, 242, 236, 0.55);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(184, 146, 90, 0.4);
+    color: var(--cafe);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+  .btn-glass:hover {
+    border-color: var(--camel);
+    background: rgba(247, 242, 236, 0.8);
+  }
+
+  .hairline {
+    border-color: var(--linea);
+  }
+}
+
+/* Aparición del botón flotante de WhatsApp (1 s) */
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.wa-float {
+  animation: float-in 0.5s ease-out 1s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.15s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
+  }
+}
