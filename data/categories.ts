@@ -28,7 +28,7 @@ export const categories: Record<Category, CategoryInfo> = {
     cardText: 'Sostenes, bralettes, bodies y calzones',
     cta: 'Ver lencería',
     headerImage: '04',
-    cardImage: '02',
+    cardImage: '04',
     subcategories: ['Sostenes', 'Bodies', 'Calzones'],
     seo: {
       title: 'Lencería colombiana en Chile: sostenes, bodies y calzones | Purpuratta',
@@ -44,7 +44,7 @@ export const categories: Record<Category, CategoryInfo> = {
     lead: 'Básicos y piezas atemporales para vestir con elegancia todos los días.',
     cardText: 'Prendas atemporales para todos los días',
     cta: 'Ver ropa',
-    headerImage: '07',
+    headerImage: '09',
     cardImage: '08',
     subcategories: [],
     seo: {
@@ -62,7 +62,7 @@ export const categories: Record<Category, CategoryInfo> = {
     cardText: 'Collares, aros y accesorios con diseños exclusivos',
     cta: 'Ver joyería',
     headerImage: '13',
-    cardImage: '11',
+    cardImage: '15',
     subcategories: ['Collares', 'Aros'],
     seo: {
       title: 'Joyería y accesorios: collares y aros | Purpuratta',
@@ -101,7 +101,7 @@ export const heroChapters: HeroChapter[] = [
     index: '02',
     category: 'ropa',
     label: 'ROPA',
-    image: '07',
+    image: '08',
     title: 'Prendas que no pasan de moda',
     text: 'Básicos y piezas atemporales para vestir con elegancia todos los días.',
     cta: 'Ver ropa',

@@ -29,10 +29,14 @@ export type Product = {
 
 /**
  * Fotos de producto de lencería: /public/images/productos/<slug>-1.webp, -2.webp...
- * [PENDIENTE: exportar fotos desde la tienda actual]. Mientras no existan,
- * `images` queda vacío y la tarjeta muestra el fallback crema con el nombre.
+ * El texto alternativo se arma con el nombre completo del producto.
  */
-const pendingPhotos: ProductImage[] = [];
+function productPhotos(slug: string, name: string, count = 1): ProductImage[] {
+  return Array.from({ length: count }, (_, i) => ({
+    src: `/images/productos/${slug}-${i + 1}.webp`,
+    alt: name,
+  }));
+}
 
 /** Usa la imagen editorial solo si el archivo ya está disponible. */
 function fromEditorial(...ids: EditorialId[]): ProductImage[] {
@@ -184,7 +188,7 @@ const lingerie: Product[] = lingerieSeed.map((p) => ({
   category: 'lenceria',
   inStock: p.inStock ?? true,
   sizes: null, // [PENDIENTE: tallas]
-  images: pendingPhotos, // [PENDIENTE: fotos de producto]
+  images: productPhotos(p.slug, p.name),
   description: null, // [PENDIENTE: descripción]
 }));
 

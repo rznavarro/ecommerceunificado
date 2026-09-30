@@ -194,6 +194,16 @@ body {
   }
 }
 
+/* Barra de progreso de los capítulos del hero */
+@keyframes hero-progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 /* Aparición del botón flotante de WhatsApp (1 s) */
 @keyframes float-in {
   from {

@@ -48,9 +48,12 @@ export const showcase: ShowcaseItem[] = [
   { image: '02', href: '/lenceria?sub=bodies' },
   { image: '05', href: '/lenceria' },
   { image: '06', productSlug: 'abrigo-largo-negro' },
+  { image: '14', productSlug: 'collar-perlas-tres-vueltas' },
   { image: '08', productSlug: 'pantalon-crema-pierna-ancha' },
-  { image: '10', productSlug: 'vestido-blanco-halter' },
   { image: '11', productSlug: 'collar-medalla-virgen-circones' },
+  { image: '09', productSlug: 'pantalon-cafe-tiro-alto' },
+  { image: '07', productSlug: 'abrigo-camel' },
+  { image: '12', productSlug: 'aros-mostacillas-verde-dorado' },
   { image: '13', productSlug: 'collar-brillantes-hojas-gota' },
   { image: '15', productSlug: 'gargantilla-perlas-cristales' },
 ];

@@ -25,7 +25,7 @@ export function ProductImage({ product, sizes, className, priority, aspect = '4 
           alt={image.alt}
           fill
           sizes={sizes}
-          priority={priority}
+          preload={priority}
           className="object-cover"
         />
       ) : (
