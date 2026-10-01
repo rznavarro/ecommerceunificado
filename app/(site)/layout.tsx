@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 import { CartHydrator } from '@/components/layout/CartHydrator';
 import { CartDrawer } from '@/components/cart/CartDrawer';
+import { ImageReveal } from '@/components/layout/ImageReveal';
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,6 +20,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Footer />
       <WhatsAppFloat />
       <CartDrawer />
+      <ImageReveal />
     </>
   );
 }

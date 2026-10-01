@@ -79,7 +79,8 @@ export type HeroChapter = {
   index: string;
   category: Category;
   label: string;
-  image: EditorialId;
+  /** 1 foto a todo el ancho, o 2 verticales en díptico (en móvil solo la primera) */
+  images: EditorialId[];
   title: string;
   text: string;
   cta: string;
@@ -91,7 +92,7 @@ export const heroChapters: HeroChapter[] = [
     index: '01',
     category: 'lenceria',
     label: 'LENCERÍA',
-    image: '04',
+    images: ['04'],
     title: 'Comodidad que se siente tuya',
     text: 'Sostenes, bralettes, bodies y calzones de encaje fabricados en Colombia, pensados para un calce perfecto.',
     cta: 'Ver lencería',
@@ -101,7 +102,7 @@ export const heroChapters: HeroChapter[] = [
     index: '02',
     category: 'ropa',
     label: 'ROPA',
-    image: '08',
+    images: ['08', '09'],
     title: 'Prendas que no pasan de moda',
     text: 'Básicos y piezas atemporales para vestir con elegancia todos los días.',
     cta: 'Ver ropa',
@@ -111,7 +112,7 @@ export const heroChapters: HeroChapter[] = [
     index: '03',
     category: 'joyeria',
     label: 'JOYERÍA',
-    image: '14',
+    images: ['14'],
     title: 'El detalle que completa tu look',
     text: 'Collares, aros y accesorios con diseños exclusivos y piezas hechas a mano.',
     cta: 'Ver joyería',

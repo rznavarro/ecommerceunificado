@@ -7,7 +7,7 @@ import { categories } from '@/data/categories';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductPurchase } from '@/components/product/ProductPurchase';
 import { ProductTabs } from '@/components/product/ProductTabs';
-import { ProductCard } from '@/components/product/ProductCard';
+import { ProductCarousel } from '@/components/product/ProductCarousel';
 import { ArrowIcon } from '@/components/ui/Icons';
 
 export const dynamicParams = false;
@@ -34,7 +34,7 @@ export default async function ProductPage(props: PageProps<'/producto/[slug]'>) 
   const product = getProduct(slug);
   if (!product) notFound();
   const category = categories[product.category];
-  const related = getRelated(product);
+  const related = getRelated(product, 12);
   const detail = product.images[1] ?? product.images[0];
 
   return (
@@ -49,7 +49,7 @@ export default async function ProductPage(props: PageProps<'/producto/[slug]'>) 
       <section aria-label="Información del producto" className="container-site mt-20 grid gap-10 lg:mt-28 lg:grid-cols-2 lg:gap-16">
         <ProductTabs product={product} />
         {detail && (
-          <div className="relative overflow-hidden rounded-[3px] bg-crema" style={{ aspectRatio: '16 / 10' }}>
+          <div className="relative overflow-hidden rounded-[3px] bg-crema" style={{ aspectRatio: '16 / 10' }} data-reveal="">
             <Image
               src={detail.src}
               alt=""
@@ -64,21 +64,23 @@ export default async function ProductPage(props: PageProps<'/producto/[slug]'>) 
 
       {related.length > 0 && (
         <section aria-labelledby="relacionados-titulo" className="container-site mt-24 lg:mt-32">
-          <div className="mb-10 flex items-end justify-between gap-6">
-            <h2 id="relacionados-titulo" className="font-display text-[32px] leading-tight font-medium text-negro md:text-[40px]">
-              También te puede gustar
-            </h2>
-            <Link href={category.href} className="label inline-flex shrink-0 items-center gap-2 text-cafe hover:text-negro">
-              Ver todo <ArrowIcon size={16} />
-            </Link>
-          </div>
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-12 md:gap-x-6 lg:grid-cols-4">
-            {related.map((p) => (
-              <li key={p.slug}>
-                <ProductCard product={p} />
-              </li>
-            ))}
-          </ul>
+          <ProductCarousel
+            products={related}
+            label="Productos relacionados"
+            header={
+              <>
+                <h2
+                  id="relacionados-titulo"
+                  className="font-display text-[32px] leading-tight font-medium text-negro md:text-[40px]"
+                >
+                  También te puede gustar
+                </h2>
+                <Link href={category.href} className="label mt-3 inline-flex items-center gap-2 text-cafe hover:text-negro">
+                  Ver todo en {category.label.toLowerCase()} <ArrowIcon size={16} />
+                </Link>
+              </>
+            }
+          />
         </section>
       )}
     </div>

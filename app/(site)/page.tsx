@@ -7,7 +7,7 @@ import { site } from '@/data/site';
 import { waGeneralUrl } from '@/lib/whatsapp';
 import { HomeHero } from '@/components/sections/HomeHero';
 import { EditorialImage } from '@/components/ui/EditorialImage';
-import { ProductCard } from '@/components/product/ProductCard';
+import { ProductCarousel } from '@/components/product/ProductCarousel';
 import { ProductImage } from '@/components/product/ProductImage';
 import { Price } from '@/components/product/Price';
 import { ArrowIcon } from '@/components/ui/Icons';
@@ -81,24 +81,24 @@ export default function HomePage() {
       {featured.length > 0 && (
         <section aria-labelledby="destacados-titulo" className="border-t border-linea bg-marfil">
           <div className="container-site section-y">
-            <div className="mb-12 flex flex-wrap items-end justify-between gap-6 md:mb-16">
-              <div>
-                <p className="label mb-4 text-dorado-texto">Lencería fabricada en Colombia</p>
-                <h2 id="destacados-titulo" className="display-h2">
-                  Los favoritos
-                </h2>
-              </div>
-              <Link href="/lenceria" className="btn-glass">
-                Ver toda la lencería
-              </Link>
-            </div>
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4">
-              {featured.map((p) => (
-                <li key={p.slug}>
-                  <ProductCard product={p} />
-                </li>
-              ))}
-            </ul>
+            <ProductCarousel
+              products={featured}
+              label="Productos favoritos"
+              header={
+                <>
+                  <p className="label mb-4 text-dorado-texto">Lencería fabricada en Colombia</p>
+                  <h2 id="destacados-titulo" className="display-h2">
+                    Los favoritos
+                  </h2>
+                  <Link
+                    href="/lenceria"
+                    className="label mt-5 inline-flex items-center gap-2 text-cafe hover:text-negro"
+                  >
+                    Ver toda la lencería <ArrowIcon size={16} />
+                  </Link>
+                </>
+              }
+            />
           </div>
         </section>
       )}

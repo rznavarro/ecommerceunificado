@@ -12,16 +12,22 @@ type Props = {
   aspect?: string;
   /** Texto del fallback crema si el archivo aún no existe */
   fallback?: string;
+  /** Efecto de aparición con blur al entrar en pantalla (por defecto sí) */
+  reveal?: boolean;
 };
 
 /**
  * Foto editorial con recorte `object-cover` y el `object-position` sugerido.
  * Si el archivo no está disponible, muestra el fondo crema (nunca otra foto).
  */
-export function EditorialImage({ id, sizes, className, imgClassName, priority, aspect, fallback }: Props) {
+export function EditorialImage({ id, sizes, className, imgClassName, priority, aspect, fallback, reveal = true }: Props) {
   const img = getEditorial(id);
   return (
-    <div className={clsx('relative overflow-hidden bg-crema', className)} style={aspect ? { aspectRatio: aspect } : undefined}>
+    <div
+      className={clsx('relative overflow-hidden bg-crema', className)}
+      style={aspect ? { aspectRatio: aspect } : undefined}
+      data-reveal={reveal && img ? '' : undefined}
+    >
       {img ? (
         <Image
           src={img.src}

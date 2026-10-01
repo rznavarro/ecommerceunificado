@@ -25,7 +25,7 @@ export function CartLines({ onNavigate, compact }: { onNavigate?: () => void; co
           <li key={`${line.slug}-${line.size ?? ''}`} className="flex gap-4 py-5">
             <Link href={href} onClick={onNavigate} className={clsx('shrink-0', compact ? 'w-20' : 'w-24 md:w-28')}>
               {product ? (
-                <ProductImage product={product} sizes="112px" />
+                <ProductImage product={product} sizes="112px" reveal={false} />
               ) : (
                 <div className="aspect-[4/5] rounded-[3px] bg-crema" />
               )}

@@ -9,16 +9,22 @@ type Props = {
   priority?: boolean;
   /** Relación de aspecto CSS, p. ej. "4 / 5" */
   aspect?: string;
+  /** Efecto de aparición con blur al entrar en pantalla (por defecto sí) */
+  reveal?: boolean;
 };
 
 /**
  * Foto principal del producto o, si falta, tarjeta crema con el nombre.
  * Nunca se usa la foto de otro producto.
  */
-export function ProductImage({ product, sizes, className, priority, aspect = '4 / 5' }: Props) {
+export function ProductImage({ product, sizes, className, priority, aspect = '4 / 5', reveal = true }: Props) {
   const image = product.images[0];
   return (
-    <div className={clsx('relative overflow-hidden rounded-[3px] bg-crema', className)} style={{ aspectRatio: aspect }}>
+    <div
+      className={clsx('relative overflow-hidden rounded-[3px] bg-crema', className)}
+      style={{ aspectRatio: aspect }}
+      data-reveal={reveal && image ? '' : undefined}
+    >
       {image ? (
         <Image
           src={image.src}

@@ -189,9 +189,41 @@ body {
     background: rgba(247, 242, 236, 0.8);
   }
 
+  /* Tarjeta de carrusel: asoma la siguiente en móvil/tablet, 4 por fila en escritorio */
+  .carousel-card {
+    width: 72%;
+  }
+  @media (min-width: 640px) {
+    .carousel-card {
+      width: 42%;
+    }
+  }
+  @media (min-width: 1024px) {
+    .carousel-card {
+      width: calc((100% - 3 * 1.5rem) / 4);
+    }
+  }
+
   .hairline {
     border-color: var(--linea);
   }
+}
+
+/* Aparición de fotos al hacer scroll (ver ImageReveal.tsx) */
+.reveal-ready [data-reveal] img {
+  filter: blur(14px);
+  opacity: 0.6;
+  transform: scale(1.04);
+  transition:
+    filter 0.9s ease-out,
+    opacity 0.9s ease-out,
+    transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+    scale 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal-ready [data-reveal][data-revealed] img {
+  filter: none;
+  opacity: 1;
+  transform: none;
 }
 
 /* Barra de progreso de los capítulos del hero */
