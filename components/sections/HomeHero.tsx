@@ -58,47 +58,49 @@ export function HomeHero() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      {/* Fotos a todo el ancho; se desenfocan al bajar */}
-      <div
-        className="absolute inset-0 will-change-[filter,transform]"
-        style={{
-          filter: 'blur(calc(var(--hero-p, 0) * 14px))',
-          transform: 'scale(calc(1 + var(--hero-p, 0) * 0.06))',
-        }}
-      >
-        {heroChapters.map((c, i) => (
-          <div
-            key={c.index}
-            aria-hidden={i !== active}
-            className={clsx(
-              'absolute inset-0 grid transition-opacity duration-[1200ms] ease-out',
-              c.images.length > 1 && 'md:grid-cols-2',
-              i === active ? 'opacity-100' : 'opacity-0',
-            )}
-          >
-            {c.images.map((id, j) => (
-              <EditorialImage
-                key={id}
-                id={id}
-                sizes={c.images.length > 1 ? '(min-width: 768px) 50vw, 100vw' : '100vw'}
-                priority={i === 0}
-                reveal={false}
-                className={clsx('h-full', j > 0 && 'hidden md:block')}
-                imgClassName={clsx(
-                  'transition-transform duration-[8000ms] ease-out',
-                  i === active ? 'scale-100' : 'scale-[1.06]',
-                )}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
+      {/* Fotos a todo el ancho, debajo del menú (nunca detrás); se desenfocan al bajar */}
+      <div className="absolute inset-x-0 top-(--chrome-h) bottom-0 overflow-hidden">
+        <div
+          className="absolute inset-0 will-change-[filter,transform]"
+          style={{
+            filter: 'blur(calc(var(--hero-p, 0) * 14px))',
+            transform: 'scale(calc(1 + var(--hero-p, 0) * 0.06))',
+          }}
+        >
+          {heroChapters.map((c, i) => (
+            <div
+              key={c.index}
+              aria-hidden={i !== active}
+              className={clsx(
+                'absolute inset-0 grid transition-opacity duration-[1200ms] ease-out',
+                c.images.length > 1 && 'md:grid-cols-2',
+                i === active ? 'opacity-100' : 'opacity-0',
+              )}
+            >
+              {c.images.map((id, j) => (
+                <EditorialImage
+                  key={id}
+                  id={id}
+                  sizes={c.images.length > 1 ? '(min-width: 768px) 50vw, 100vw' : '100vw'}
+                  priority={i === 0}
+                  reveal={false}
+                  className={clsx('h-full', j > 0 && 'hidden md:block')}
+                  imgClassName={clsx(
+                    'transition-transform duration-[8000ms] ease-out',
+                    i === active ? 'scale-100' : 'scale-[1.06]',
+                  )}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
 
-      {/* Velo para que el texto se lea sobre la foto */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-linear-to-t from-marfil via-marfil/60 to-marfil/0 lg:bg-linear-to-r lg:from-marfil/90 lg:via-marfil/45 lg:to-marfil/0"
-      />
+        {/* Velo para que el texto se lea sobre la foto */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-t from-marfil via-marfil/60 to-marfil/0 lg:bg-linear-to-r lg:from-marfil/90 lg:via-marfil/45 lg:to-marfil/0"
+        />
+      </div>
 
       {/* Texto */}
       <div
