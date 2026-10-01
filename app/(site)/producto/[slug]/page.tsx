@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getProduct, products } from '@/data/products';
+import { getProduct, getRelated, products } from '@/data/products';
 import { categories } from '@/data/categories';
-import { waProductUrl } from '@/lib/whatsapp';
-import { Price } from '@/components/product/Price';
-import { ProductImage } from '@/components/product/ProductImage';
+import { ProductGallery } from '@/components/product/ProductGallery';
+import { ProductPurchase } from '@/components/product/ProductPurchase';
+import { ProductTabs } from '@/components/product/ProductTabs';
+import { ProductCard } from '@/components/product/ProductCard';
+import { ArrowIcon } from '@/components/ui/Icons';
 
 export const dynamicParams = false;
 
@@ -25,41 +28,59 @@ export async function generateMetadata(props: PageProps<'/producto/[slug]'>): Pr
   };
 }
 
-/** Ficha de producto — Fase 1: datos base. Galería, tallas y carrito en la Fase 3. */
+/** Ficha de producto: galería, compra, pestañas, detalle y relacionados. */
 export default async function ProductPage(props: PageProps<'/producto/[slug]'>) {
   const { slug } = await props.params;
   const product = getProduct(slug);
   if (!product) notFound();
   const category = categories[product.category];
+  const related = getRelated(product);
+  const detail = product.images[1] ?? product.images[0];
 
   return (
-    <div className="container-site grid gap-10 pt-[calc(var(--chrome-h)+40px)] pb-28 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-      <ProductImage product={product} sizes="(min-width: 1024px) 55vw, 100vw" priority />
-      <div className="lg:pt-10">
-        <nav aria-label="Migas de pan" className="label mb-6 text-cafe/70">
-          <Link href="/" className="hover:text-negro">
-            Inicio
-          </Link>
-          <span aria-hidden="true"> / </span>
-          <Link href={category.href} className="hover:text-negro">
-            {category.label}
-          </Link>
-        </nav>
-        <h1 className="font-display text-[34px] leading-[1.1] font-medium text-negro md:text-[46px]">
-          {product.name}
-        </h1>
-        <Price product={product} className="mt-5 text-[18px]" />
-        {!product.inStock && <p className="label mt-4 text-ciruela">Agotado</p>}
-        {product.description && <p className="mt-8 max-w-lg text-cafe/85">{product.description}</p>}
-        <a
-          href={waProductUrl(product.displayName)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-primary mt-10"
-        >
-          {product.inStock ? 'Consultar por WhatsApp' : 'Avísame por WhatsApp'}
-        </a>
+    <div className="pt-[calc(var(--chrome-h)+32px)] pb-28">
+      <div className="container-site grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16 xl:gap-24">
+        <ProductGallery product={product} />
+        <div className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start lg:pt-4">
+          <ProductPurchase product={product} />
+        </div>
       </div>
+
+      <section aria-label="Información del producto" className="container-site mt-20 grid gap-10 lg:mt-28 lg:grid-cols-2 lg:gap-16">
+        <ProductTabs product={product} />
+        {detail && (
+          <div className="relative overflow-hidden rounded-[3px] bg-crema" style={{ aspectRatio: '16 / 10' }}>
+            <Image
+              src={detail.src}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="scale-[1.6] object-cover"
+              style={{ objectPosition: '50% 55%' }}
+            />
+          </div>
+        )}
+      </section>
+
+      {related.length > 0 && (
+        <section aria-labelledby="relacionados-titulo" className="container-site mt-24 lg:mt-32">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <h2 id="relacionados-titulo" className="font-display text-[32px] leading-tight font-medium text-negro md:text-[40px]">
+              También te puede gustar
+            </h2>
+            <Link href={category.href} className="label inline-flex shrink-0 items-center gap-2 text-cafe hover:text-negro">
+              Ver todo <ArrowIcon size={16} />
+            </Link>
+          </div>
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-12 md:gap-x-6 lg:grid-cols-4">
+            {related.map((p) => (
+              <li key={p.slug}>
+                <ProductCard product={p} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }

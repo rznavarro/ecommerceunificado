@@ -3,13 +3,14 @@ import type { Product } from '@/data/products';
 import { isOnSale } from '@/data/products';
 import { Price } from './Price';
 import { ProductImage } from './ProductImage';
+import { FavoriteButton } from './FavoriteButton';
 
-/** Tarjeta base de producto (Fase 1). La Fase 3 suma talla rápida y "Añadir". */
+/** Tarjeta de producto: foto, nombre, precio y favorito. */
 export function ProductCard({ product }: { product: Product }) {
   const sale = isOnSale(product);
   return (
     <article className="group relative">
-      <Link href={`/producto/${product.slug}`} className="block">
+      <Link href={`/producto/${product.slug}`} className="block" tabIndex={-1} aria-hidden="true">
         <div className="relative">
           <ProductImage
             product={product}
@@ -25,11 +26,16 @@ export function ProductCard({ product }: { product: Product }) {
             )}
           </div>
         </div>
-        <h3 className="mt-4 font-display text-[20px] leading-snug text-negro md:text-[22px]">
-          {product.displayName}
-        </h3>
       </Link>
-      <Price product={product} className="mt-1" />
+      <div className="mt-4 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="font-display text-[20px] leading-snug text-negro md:text-[22px]">
+            <Link href={`/producto/${product.slug}`}>{product.displayName}</Link>
+          </h3>
+          <Price product={product} className="mt-1" />
+        </div>
+        <FavoriteButton slug={product.slug} name={product.displayName} className="-mt-1 -mr-2 size-10 shrink-0" />
+      </div>
     </article>
   );
 }

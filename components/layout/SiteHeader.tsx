@@ -27,6 +27,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const count = useCart(selectCount);
+  const openCart = useCart((s) => s.open);
 
   useEffect(() => {
     let frame = 0;
@@ -104,6 +105,12 @@ export function SiteHeader() {
 
               <Link
                 href="/carrito"
+                onClick={(e) => {
+                  if (pathname === '/carrito' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+                  e.preventDefault();
+                  openCart();
+                }}
+                aria-haspopup="dialog"
                 className="relative inline-flex size-11 items-center justify-center text-cafe transition-colors hover:text-negro"
                 aria-label={count > 0 ? `Carrito, ${count} ${count === 1 ? 'producto' : 'productos'}` : 'Carrito vacío'}
               >

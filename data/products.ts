@@ -50,6 +50,9 @@ type LingerieSeed = Omit<Product, 'category' | 'sizes' | 'images' | 'description
   inStock?: boolean;
 };
 
+/** Tallas estándar mientras no se carguen las reales por producto. */
+const standardSizes = ['S', 'M', 'L', 'XL'];
+
 /** Lencería: precios reales vigentes en purpuratta.cl. Slug = handle actual. */
 const lingerieSeed: LingerieSeed[] = [
   // Calzones
@@ -187,7 +190,7 @@ const lingerie: Product[] = lingerieSeed.map((p) => ({
   ...p,
   category: 'lenceria',
   inStock: p.inStock ?? true,
-  sizes: null, // [PENDIENTE: tallas]
+  sizes: standardSizes, // [PENDIENTE: confirmar tallas reales]
   images: productPhotos(p.slug, p.name),
   description: null, // [PENDIENTE: descripción]
 }));
@@ -205,7 +208,7 @@ const apparel: Product[] = [
     category: 'ropa',
     price: null,
     inStock: true,
-    sizes: null,
+    sizes: standardSizes,
     images: fromEditorial('06'),
     description: null,
     provisional: true,
@@ -217,7 +220,7 @@ const apparel: Product[] = [
     category: 'ropa',
     price: null,
     inStock: true,
-    sizes: null,
+    sizes: standardSizes,
     images: fromEditorial('07'),
     description: null,
     provisional: true,
@@ -229,7 +232,7 @@ const apparel: Product[] = [
     category: 'ropa',
     price: null,
     inStock: true,
-    sizes: null,
+    sizes: standardSizes,
     images: fromEditorial('08'),
     description: null,
     provisional: true,
@@ -241,7 +244,7 @@ const apparel: Product[] = [
     category: 'ropa',
     price: null,
     inStock: true,
-    sizes: null,
+    sizes: standardSizes,
     images: fromEditorial('09'),
     description: null,
     provisional: true,
@@ -253,7 +256,7 @@ const apparel: Product[] = [
     category: 'ropa',
     price: null,
     inStock: true,
-    sizes: null,
+    sizes: standardSizes,
     images: fromEditorial('10'),
     description: null,
     provisional: true,
@@ -359,6 +362,21 @@ export function getFeatured(): Product[] {
   return featuredOrder
     .map((slug) => getProduct(slug))
     .filter((p): p is Product => !!p && !!p.featured && p.inStock && p.price !== null);
+}
+
+/** Productos de la misma categoría: primero con foto y en stock. */
+export function getRelated(product: Product, n = 4): Product[] {
+  const score = (p: Product) => (p.images.length > 0 ? 2 : 0) + (p.inStock ? 1 : 0);
+  return products
+    .filter((p) => p.category === product.category && p.slug !== product.slug)
+    .sort((a, b) => score(b) - score(a))
+    .slice(0, n);
+}
+
+/** Porcentaje de descuento redondeado, o null si no hay oferta. */
+export function discountPercent(p: Product): number | null {
+  if (!isOnSale(p)) return null;
+  return Math.round((1 - p.price! / p.compareAtPrice!) * 100);
 }
 
 export function isOnSale(p: Product): boolean {
