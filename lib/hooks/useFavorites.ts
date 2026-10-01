@@ -36,9 +36,14 @@ function subscribe(cb: () => void) {
   };
 }
 
+/** Lista de favoritos guardados en este navegador (slugs). */
+export function useFavoriteSlugs(): string[] {
+  return useSyncExternalStore(subscribe, read, () => EMPTY);
+}
+
 /** Favoritos guardados en este navegador (sin cuenta de usuario). */
 export function useFavorite(slug: string) {
-  const list = useSyncExternalStore(subscribe, read, () => EMPTY);
+  const list = useFavoriteSlugs();
   const isFavorite = list.includes(slug);
 
   const toggle = useCallback(() => {

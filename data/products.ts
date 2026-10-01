@@ -379,6 +379,13 @@ export function discountPercent(p: Product): number | null {
   return Math.round((1 - p.price! / p.compareAtPrice!) * 100);
 }
 
+/** Productos en oferta y en stock, de mayor a menor descuento. */
+export function getOnSale(): Product[] {
+  return products
+    .filter((p) => p.inStock && isOnSale(p))
+    .sort((a, b) => (discountPercent(b) ?? 0) - (discountPercent(a) ?? 0));
+}
+
 export function isOnSale(p: Product): boolean {
   return p.price !== null && p.compareAtPrice !== undefined && p.compareAtPrice > p.price;
 }

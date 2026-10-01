@@ -8,7 +8,7 @@ import { WhatsAppIcon } from '@/components/ui/Icons';
 
 /**
  * Botón flotante (todas las páginas). En ficha de producto, el mensaje incluye
- * el producto. La ficha móvil sube el botón con --float-offset: 72px.
+ * el producto. En móvil sube sobre la barra inferior con --float-offset.
  */
 export function WhatsAppFloat() {
   const pathname = usePathname();
@@ -22,7 +22,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
-      className="wa-float fixed z-50 inline-flex size-14 items-center justify-center rounded-full bg-cafe text-marfil shadow-[0_12px_30px_-10px_rgba(28,26,24,.55)] transition-[background-color,bottom] duration-300 hover:bg-negro"
+      className="wa-float fixed z-50 inline-flex size-12 items-center lg:size-14 justify-center rounded-full bg-cafe text-marfil shadow-[0_12px_30px_-10px_rgba(28,26,24,.55)] transition-[background-color,bottom] duration-300 hover:bg-negro"
       style={{
         right: 'calc(16px + env(safe-area-inset-right))',
         bottom: 'calc(16px + env(safe-area-inset-bottom) + var(--float-offset))',

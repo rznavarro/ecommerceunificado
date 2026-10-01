@@ -49,7 +49,7 @@ export default async function ProductPage(props: PageProps<'/producto/[slug]'>) 
       <section aria-label="Información del producto" className="container-site mt-20 grid gap-10 lg:mt-28 lg:grid-cols-2 lg:gap-16">
         <ProductTabs product={product} />
         {detail && (
-          <div className="relative overflow-hidden rounded-[3px] bg-crema" style={{ aspectRatio: '16 / 10' }} data-reveal="">
+          <div className="relative overflow-hidden rounded-2xl bg-crema" style={{ aspectRatio: '16 / 10' }} data-reveal="">
             <Image
               src={detail.src}
               alt=""

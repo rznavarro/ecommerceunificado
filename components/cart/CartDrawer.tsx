@@ -62,7 +62,7 @@ export function CartDrawer() {
             <div className="flex-1 overflow-y-auto px-6">
               <CartLines onNavigate={close} compact />
             </div>
-            <div className="border-t border-linea px-6 pt-5 pb-[max(20px,env(safe-area-inset-bottom))]">
+            <div className="border-t border-linea px-6 pt-5 pb-[calc(20px+var(--mobile-nav-h,0px)+env(safe-area-inset-bottom))]">
               <div className="flex items-baseline justify-between">
                 <span className="label text-cafe">Subtotal</span>
                 <span className="text-[18px] font-medium text-negro tabular-nums">{formatCLP(subtotal)}</span>

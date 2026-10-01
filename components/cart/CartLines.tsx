@@ -27,7 +27,7 @@ export function CartLines({ onNavigate, compact }: { onNavigate?: () => void; co
               {product ? (
                 <ProductImage product={product} sizes="112px" reveal={false} />
               ) : (
-                <div className="aspect-[4/5] rounded-[3px] bg-crema" />
+                <div className="aspect-[4/5] rounded-2xl bg-crema" />
               )}
             </Link>
             <div className="flex min-w-0 flex-1 flex-col">

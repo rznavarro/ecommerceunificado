@@ -19,17 +19,17 @@ export function ProductCard({ product }: { product: Product }) {
           />
           <div className="absolute top-3 left-3 flex gap-2">
             {!product.inStock && (
-              <span className="label bg-marfil/90 px-2.5 py-1.5 text-cafe">Agotado</span>
+              <span className="label rounded-full bg-marfil/90 px-3 py-1.5 text-cafe">Agotado</span>
             )}
             {product.inStock && sale && (
-              <span className="label bg-ciruela px-2.5 py-1.5 text-marfil">Oferta</span>
+              <span className="label rounded-full bg-ciruela px-3 py-1.5 text-marfil">Oferta</span>
             )}
           </div>
         </div>
       </Link>
       <div className="mt-4 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="font-display text-[20px] leading-snug text-negro md:text-[22px]">
+          <h3 className="font-display text-[17px] leading-snug text-negro sm:text-[20px] md:text-[22px]">
             <Link href={`/producto/${product.slug}`}>{product.displayName}</Link>
           </h3>
           <Price product={product} className="mt-1" />

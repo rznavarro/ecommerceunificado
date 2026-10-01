@@ -130,7 +130,7 @@ export function CartView() {
       </section>
 
       <section aria-labelledby="despacho-titulo" className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start">
-        <div className="rounded-[3px] bg-crema p-6 md:p-8">
+        <div className="rounded-2xl bg-crema p-6 md:p-8">
           <h2 className="label text-cafe">Resumen</h2>
           <dl className="mt-4 space-y-2 text-[15px]">
             <div className="flex justify-between">

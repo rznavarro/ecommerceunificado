@@ -21,7 +21,7 @@ export function ProductImage({ product, sizes, className, priority, aspect = '4 
   const image = product.images[0];
   return (
     <div
-      className={clsx('relative overflow-hidden rounded-[3px] bg-crema', className)}
+      className={clsx('relative overflow-hidden rounded-2xl bg-crema', className)}
       style={{ aspectRatio: aspect }}
       data-reveal={reveal && image ? '' : undefined}
     >

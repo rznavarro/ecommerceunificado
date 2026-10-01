@@ -108,9 +108,6 @@ export function HomeHero() {
         style={{ opacity: 'calc(1 - var(--hero-p, 0) * 1.4)' }}
       >
         <div className="container-site">
-          {/* H1 único de la portada: solo para buscadores y lectores de pantalla */}
-          <h1 className="sr-only">Lencería, ropa y joyería en un solo lugar</h1>
-
           <div aria-live="polite" className="min-h-[200px] md:min-h-[240px] lg:min-h-[290px]">
             <p key={chapter.index} className="animate-[float-in_.8s_ease-out_both]">
               <span className="display-hero block max-w-[11ch]">{chapter.title}</span>

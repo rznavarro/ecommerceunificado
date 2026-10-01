@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { mainNav } from '@/data/categories';
 import { useCart, selectCount } from '@/lib/cart-store';
+import { useUI } from '@/lib/ui-store';
 import { Logo } from '@/components/ui/Logo';
 import { BagIcon, SearchIcon } from '@/components/ui/Icons';
 import { TopBar } from './TopBar';
@@ -18,14 +19,13 @@ const SOLID_AFTER = 80;
  * Barra superior + menú, fijos arriba.
  * - Transparente sobre el hero de la portada; fondo marfil 92 % + blur tras 80 px.
  * - La barra superior se desliza fuera al empezar a bajar.
- * - Fase 2: ocultar al bajar rápido / reaparecer al subir con ScrollTrigger.
+ * - Móvil (< 1024 px): logo + carrito en píldora; la navegación va en la barra inferior (MobileNav).
  */
 export function SiteHeader() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const { menuOpen, searchOpen, openSearch, closeSearch, closeMenu } = useUI();
   const count = useCart(selectCount);
   const openCart = useCart((s) => s.open);
 
@@ -95,13 +95,29 @@ export function SiteHeader() {
             <div className="flex items-center gap-1">
               <button
                 type="button"
-                onClick={() => setSearchOpen(true)}
+                onClick={openSearch}
                 className="hidden size-11 items-center justify-center text-cafe transition-colors hover:text-negro lg:inline-flex"
                 aria-label="Buscar productos"
                 aria-haspopup="dialog"
               >
                 <SearchIcon />
               </button>
+
+              {/* Móvil: carrito en píldora */}
+              <Link
+                href="/carrito"
+                onClick={(e) => {
+                  if (pathname === '/carrito' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+                  e.preventDefault();
+                  openCart();
+                }}
+                aria-haspopup="dialog"
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-cafe px-4 text-[14px] font-medium text-marfil tabular-nums lg:hidden"
+                aria-label={count > 0 ? `Carrito, ${count} ${count === 1 ? 'producto' : 'productos'}` : 'Carrito vacío'}
+              >
+                <BagIcon size={18} />
+                {count}
+              </Link>
 
               <Link
                 href="/carrito"
@@ -111,7 +127,7 @@ export function SiteHeader() {
                   openCart();
                 }}
                 aria-haspopup="dialog"
-                className="relative inline-flex size-11 items-center justify-center text-cafe transition-colors hover:text-negro"
+                className="relative hidden size-11 items-center justify-center text-cafe transition-colors hover:text-negro lg:inline-flex"
                 aria-label={count > 0 ? `Carrito, ${count} ${count === 1 ? 'producto' : 'productos'}` : 'Carrito vacío'}
               >
                 <BagIcon />
@@ -125,17 +141,6 @@ export function SiteHeader() {
                   {count}
                 </span>
               </Link>
-
-              <button
-                type="button"
-                onClick={() => setMenuOpen(true)}
-                className="label inline-flex min-h-11 items-center pl-3 text-cafe lg:hidden"
-                aria-haspopup="dialog"
-                aria-expanded={menuOpen}
-                aria-controls="menu-movil"
-              >
-                Menú
-              </button>
             </div>
           </div>
         </header>
@@ -143,13 +148,10 @@ export function SiteHeader() {
 
       <MobileMenu
         open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        onSearch={() => {
-          setMenuOpen(false);
-          setSearchOpen(true);
-        }}
+        onClose={closeMenu}
+        onSearch={openSearch}
       />
-      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchModal open={searchOpen} onClose={closeSearch} />
     </>
   );
 }

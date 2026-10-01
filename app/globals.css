@@ -24,6 +24,19 @@
   --float-offset: 0px;
 }
 
+/* Móvil: sin barra superior; barra de navegación inferior (MobileNav) */
+@media (max-width: 767px) {
+  :root {
+    --topbar-h: 0px;
+  }
+}
+@media (max-width: 1023px) {
+  :root {
+    --mobile-nav-h: 68px;
+    --float-offset: calc(var(--mobile-nav-h) + 8px);
+  }
+}
+
 @media (min-width: 1024px) {
   :root {
     --header-h: 76px;
@@ -191,11 +204,11 @@ body {
 
   /* Tarjeta de carrusel: asoma la siguiente en móvil/tablet, 4 por fila en escritorio */
   .carousel-card {
-    width: 72%;
+    width: 46%;
   }
   @media (min-width: 640px) {
     .carousel-card {
-      width: 42%;
+      width: 32%;
     }
   }
   @media (min-width: 1024px) {

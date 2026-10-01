@@ -64,7 +64,7 @@ export function MobileMenu({ open, onClose, onSearch }: Props) {
         </button>
       </nav>
 
-      <div className="container-site border-t border-linea py-6 pb-[max(24px,env(safe-area-inset-bottom))]">
+      <div className="container-site border-t border-linea py-6 pb-[calc(24px+var(--mobile-nav-h,0px)+env(safe-area-inset-bottom))]">
         <a href={waGeneralUrl()} target="_blank" rel="noopener noreferrer" className="btn-glass w-full">
           Escríbenos · {site.whatsapp.display}
         </a>

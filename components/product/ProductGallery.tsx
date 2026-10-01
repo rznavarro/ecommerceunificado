@@ -23,7 +23,7 @@ export function ProductGallery({ product }: { product: Product }) {
 
   return (
     <div className={clsx('flex flex-col gap-4', hasThumbs && 'lg:flex-row-reverse')}>
-      <div className="relative flex-1 overflow-hidden rounded-[3px] bg-crema" style={{ aspectRatio: '4 / 5' }}>
+      <div className="relative flex-1 overflow-hidden rounded-2xl bg-crema" style={{ aspectRatio: '4 / 5' }}>
         {current ? (
           <>
             <Image
@@ -62,7 +62,7 @@ export function ProductGallery({ product }: { product: Product }) {
                 aria-current={i === active ? 'true' : undefined}
                 aria-label={`Ver foto ${i + 1} de ${images.length}`}
                 className={clsx(
-                  'relative block w-full overflow-hidden rounded-[3px] bg-crema ring-offset-2 ring-offset-marfil transition',
+                  'relative block w-full overflow-hidden rounded-2xl bg-crema ring-offset-2 ring-offset-marfil transition',
                   i === active ? 'ring-1 ring-cafe' : 'opacity-70 hover:opacity-100',
                 )}
                 style={{ aspectRatio: '4 / 5' }}
