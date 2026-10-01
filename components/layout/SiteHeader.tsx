@@ -66,7 +66,7 @@ export function SiteHeader() {
           )}
         >
           <div className="container-site flex h-full items-center justify-between gap-6">
-            <Logo className="py-2 text-[28px] lg:text-[32px]" />
+            <Logo className="py-2" />
 
             <nav aria-label="Principal" className="hidden lg:block">
               <ul className="flex items-center gap-10">

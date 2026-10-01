@@ -21,7 +21,7 @@ export function Footer() {
     <footer className="bg-cafe text-marfil">
       <div className="container-site grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr] lg:py-24">
         <div>
-          <Logo tone="marfil" className="text-[34px]" />
+          <Logo tone="marfil" />
           <p className="mt-4 max-w-xs text-[15px] text-marfil/80">{site.descriptor}</p>
         </div>
 

@@ -28,7 +28,7 @@ export function MobileMenu({ open, onClose, onSearch }: Props) {
       className={clsx('fixed inset-0 z-60 flex flex-col bg-marfil lg:hidden', open && 'animate-[float-in_.35s_ease-out]')}
     >
       <div className="container-site flex h-(--header-h) shrink-0 items-center justify-between border-b border-linea">
-        <Logo className="py-2 text-[28px]" />
+        <Logo className="py-2" />
         <button
           type="button"
           onClick={onClose}
