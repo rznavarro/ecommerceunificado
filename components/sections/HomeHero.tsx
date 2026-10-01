@@ -108,14 +108,12 @@ export function HomeHero() {
         style={{ opacity: 'calc(1 - var(--hero-p, 0) * 1.4)' }}
       >
         <div className="container-site">
-          <h1 className="label mb-6 text-dorado-texto">Lencería, ropa y joyería en un solo lugar</h1>
+          {/* H1 único de la portada: solo para buscadores y lectores de pantalla */}
+          <h1 className="sr-only">Lencería, ropa y joyería en un solo lugar</h1>
 
-          <div aria-live="polite" className="min-h-[230px] md:min-h-[270px] lg:min-h-[330px]">
+          <div aria-live="polite" className="min-h-[200px] md:min-h-[240px] lg:min-h-[290px]">
             <p key={chapter.index} className="animate-[float-in_.8s_ease-out_both]">
-              <span className="label block text-cafe/75">
-                {chapter.index} — {chapter.label}
-              </span>
-              <span className="display-hero mt-5 block max-w-[11ch]">{chapter.title}</span>
+              <span className="display-hero block max-w-[11ch]">{chapter.title}</span>
               <span className="mt-6 block max-w-md text-[17px] text-cafe/90">{chapter.text}</span>
             </p>
           </div>
@@ -125,38 +123,6 @@ export function HomeHero() {
               {chapter.cta}
             </Link>
           </div>
-
-          <ul className="mt-12 grid max-w-lg grid-cols-3 gap-4 lg:mt-16" aria-label="Elegir colección">
-            {heroChapters.map((c, i) => (
-              <li key={c.index}>
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-current={i === active ? 'true' : undefined}
-                  className="group flex w-full flex-col gap-3 pt-1 text-left"
-                >
-                  <span className="relative block h-px w-full bg-cafe/20">
-                    <span
-                      key={i === active ? `on-${active}-${paused}` : 'off'}
-                      className={clsx(
-                        'absolute inset-y-0 left-0 bg-cafe',
-                        i === active ? (paused ? 'w-full' : 'animate-[hero-progress_linear_both]') : 'w-0',
-                      )}
-                      style={i === active && !paused ? { animationDuration: `${INTERVAL}ms` } : undefined}
-                    />
-                  </span>
-                  <span
-                    className={clsx(
-                      'label transition-colors',
-                      i === active ? 'text-negro' : 'text-cafe/65 group-hover:text-cafe',
-                    )}
-                  >
-                    {c.index} {c.label}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

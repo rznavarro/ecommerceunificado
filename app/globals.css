@@ -226,16 +226,6 @@ body {
   transform: none;
 }
 
-/* Barra de progreso de los capítulos del hero */
-@keyframes hero-progress {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
 /* Panel lateral del carrito */
 @keyframes drawer-in {
   from {
