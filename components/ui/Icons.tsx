@@ -141,6 +141,47 @@ export const GridIcon = (p: IconProps) => (
   </Svg>
 );
 
+export const LeafIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z" />
+    <path d="M5 19 13 11" />
+  </Svg>
+);
+
+export const DropIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M12 3.5s6 6.4 6 10.5a6 6 0 0 1-12 0c0-4.1 6-10.5 6-10.5Z" />
+    <path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5" />
+  </Svg>
+);
+
+export const SparkIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M12 3.5 13.8 10.2 20.5 12l-6.7 1.8L12 20.5l-1.8-6.7L3.5 12l6.7-1.8L12 3.5Z" />
+  </Svg>
+);
+
+export const HandIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M8 12V6.5a1.5 1.5 0 0 1 3 0V11m0-5.5V5a1.5 1.5 0 0 1 3 0v6m0-4.5a1.5 1.5 0 0 1 3 0V14a6 6 0 0 1-6 6h-.5a6 6 0 0 1-5-2.7L3.8 14.4a1.6 1.6 0 0 1 2.6-1.8L8 14.5" />
+  </Svg>
+);
+
+export const ShareIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <circle cx="17.5" cy="5.5" r="2.5" />
+    <circle cx="6.5" cy="12" r="2.5" />
+    <circle cx="17.5" cy="18.5" r="2.5" />
+    <path d="m8.7 10.7 6.6-3.9M8.7 13.3l6.6 3.9" />
+  </Svg>
+);
+
+export const BackIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M20 12H5M10 7l-5 5 5 5" />
+  </Svg>
+);
+
 export const WhatsAppIcon = ({ size = 26, ...rest }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" {...rest}>
     <path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.98L2 22l5.16-1.5A9.93 9.93 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.07.9.92-2.98-.2-.31a8.17 8.17 0 1 1 6.83 3.72Zm4.48-6.12c-.25-.12-1.46-.72-1.68-.8-.23-.09-.39-.13-.55.12-.17.24-.64.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.34-2.92c-.25-.43.25-.4.72-1.34.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.73 2.73 0 0 0-.85 2.03 4.74 4.74 0 0 0 1 2.52 10.84 10.84 0 0 0 4.15 3.67c1.55.67 2.15.72 2.93.6.47-.07 1.46-.6 1.66-1.17.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z" />

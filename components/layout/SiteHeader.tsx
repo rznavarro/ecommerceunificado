@@ -24,6 +24,8 @@ const SOLID_AFTER = 80;
 export function SiteHeader() {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  // La ficha móvil tiene su propia barra (volver, favorito, compartir).
+  const isProduct = pathname.startsWith('/producto/');
   const [scrolled, setScrolled] = useState(false);
   const { menuOpen, searchOpen, openSearch, closeSearch, closeMenu } = useUI();
   const count = useCart(selectCount);
@@ -55,6 +57,7 @@ export function SiteHeader() {
         className={clsx(
           'fixed inset-x-0 top-0 z-40 transition-transform duration-500 ease-out will-change-transform',
           scrolled && '-translate-y-(--topbar-h)',
+          isProduct && 'max-lg:hidden',
         )}
       >
         <TopBar />

@@ -23,66 +23,84 @@ export function MobileNav() {
   const openCart = useCart((s) => s.open);
   const favCount = useFavoriteSlugs().length;
 
+  // Ficha de producto: sin barra (tiene su botón fijo de compra); solo el espacio al final.
+  if (pathname.startsWith('/producto/')) {
+    return <div aria-hidden="true" className="h-[calc(88px+env(safe-area-inset-bottom))] bg-cafe lg:hidden" />;
+  }
+
   const isHome = pathname === '/' && !menuOpen && !cartOpen;
   const isFav = pathname === '/favoritos' && !menuOpen && !cartOpen;
 
   return (
-    <nav
-      aria-label="Navegación inferior"
-      className="fixed inset-x-0 bottom-0 z-[65] border-t border-linea bg-marfil/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
-    >
-      <ul className="mx-auto flex h-(--mobile-nav-h) max-w-md items-center justify-around px-4">
-        <li>
-          <Link href="/" onClick={closeMenu} aria-label="Inicio" aria-current={isHome ? 'page' : undefined} className={clsx(itemClass, isHome && activeClass)}>
-            <HomeIcon size={22} />
-          </Link>
-        </li>
-        <li>
-          <button
-            type="button"
-            onClick={menuOpen ? closeMenu : openMenu}
-            aria-label="Tienda: categorías"
-            aria-expanded={menuOpen}
-            aria-controls="menu-movil"
-            className={clsx(itemClass, menuOpen && activeClass)}
-          >
-            <GridIcon size={22} />
-          </button>
-        </li>
-        <li>
-          <Link
-            href="/favoritos"
-            onClick={closeMenu}
-            aria-label={`Favoritos${favCount ? `, ${favCount}` : ''}`}
-            aria-current={isFav ? 'page' : undefined}
-            className={clsx(itemClass, isFav && activeClass)}
-          >
-            <HeartIcon size={22} filled={isFav} />
-          </Link>
-        </li>
-        <li>
-          <button
-            type="button"
-            onClick={() => {
-              closeMenu();
-              openCart();
-            }}
-            aria-label={count > 0 ? `Carrito, ${count} ${count === 1 ? 'producto' : 'productos'}` : 'Carrito vacío'}
-            aria-haspopup="dialog"
-            className={clsx(itemClass, cartOpen && activeClass)}
-          >
-            <BagIcon size={22} />
-            {count > 0 && (
-              <span
-                aria-hidden="true"
-                className="absolute top-1.5 right-3 flex h-4 min-w-4 items-center justify-center rounded-full bg-ciruela px-1 text-[10px] leading-none font-medium text-marfil tabular-nums"
-              >
-                {count}
-              </span>
-            )}
-          </button>
-        </li>
-      </ul>
-    </nav>
+    <>
+      {/* Espacio al final de la página para que la barra no tape el pie */}
+      <div
+        aria-hidden="true"
+        className="h-[calc(var(--mobile-nav-h,0px)+env(safe-area-inset-bottom))] bg-cafe lg:hidden"
+      />
+      <nav
+        aria-label="Navegación inferior"
+        className="fixed inset-x-0 bottom-0 z-[65] border-t border-linea bg-marfil/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
+      >
+        <ul className="mx-auto flex h-(--mobile-nav-h) max-w-md items-center justify-around px-4">
+          <li>
+            <Link
+              href="/"
+              onClick={closeMenu}
+              aria-label="Inicio"
+              aria-current={isHome ? 'page' : undefined}
+              className={clsx(itemClass, isHome && activeClass)}
+            >
+              <HomeIcon size={22} />
+            </Link>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={menuOpen ? closeMenu : openMenu}
+              aria-label="Tienda: categorías"
+              aria-expanded={menuOpen}
+              aria-controls="menu-movil"
+              className={clsx(itemClass, menuOpen && activeClass)}
+            >
+              <GridIcon size={22} />
+            </button>
+          </li>
+          <li>
+            <Link
+              href="/favoritos"
+              onClick={closeMenu}
+              aria-label={`Favoritos${favCount ? `, ${favCount}` : ''}`}
+              aria-current={isFav ? 'page' : undefined}
+              className={clsx(itemClass, isFav && activeClass)}
+            >
+              <HeartIcon size={22} filled={isFav} />
+            </Link>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                closeMenu();
+                openCart();
+              }}
+              aria-label={count > 0 ? `Carrito, ${count} ${count === 1 ? 'producto' : 'productos'}` : 'Carrito vacío'}
+              aria-haspopup="dialog"
+              className={clsx(itemClass, cartOpen && activeClass)}
+            >
+              <BagIcon size={22} />
+              {count > 0 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute top-1.5 right-3 flex h-4 min-w-4 items-center justify-center rounded-full bg-ciruela px-1 text-[10px] leading-none font-medium text-marfil tabular-nums"
+                >
+                  {count}
+                </span>
+              )}
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }

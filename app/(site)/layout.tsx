@@ -19,8 +19,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <main id="contenido">{children}</main>
       <Footer />
-      {/* Espacio para la barra inferior en móvil */}
-      <div aria-hidden="true" className="h-[calc(var(--mobile-nav-h,0px)+env(safe-area-inset-bottom))] bg-cafe lg:hidden" />
       <WhatsAppFloat />
       <CartDrawer />
       <ImageReveal />

@@ -8,6 +8,7 @@ import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductPurchase } from '@/components/product/ProductPurchase';
 import { ProductTabs } from '@/components/product/ProductTabs';
 import { ProductCarousel } from '@/components/product/ProductCarousel';
+import { MobileProductView } from '@/components/product/MobileProductView';
 import { ArrowIcon } from '@/components/ui/Icons';
 
 export const dynamicParams = false;
@@ -38,32 +39,45 @@ export default async function ProductPage(props: PageProps<'/producto/[slug]'>) 
   const detail = product.images[1] ?? product.images[0];
 
   return (
-    <div className="pt-[calc(var(--chrome-h)+32px)] pb-28">
-      <div className="container-site grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16 xl:gap-24">
-        <ProductGallery product={product} />
-        <div className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start lg:pt-4">
-          <ProductPurchase product={product} />
+    <div className="pb-28 lg:pt-[calc(var(--chrome-h)+32px)]">
+      {/* Móvil y tablet: estilo app, tema oscuro */}
+      <MobileProductView product={product} />
+
+      {/* Escritorio */}
+      <div className="hidden lg:block">
+        <div className="container-site grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16 xl:gap-24">
+          <ProductGallery product={product} />
+          <div className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start lg:pt-4">
+            <ProductPurchase product={product} />
+          </div>
         </div>
+
+        <section
+          aria-label="Información del producto"
+          className="container-site mt-20 grid gap-10 lg:mt-28 lg:grid-cols-2 lg:gap-16"
+        >
+          <ProductTabs product={product} />
+          {detail && (
+            <div
+              className="relative overflow-hidden rounded-2xl bg-crema"
+              style={{ aspectRatio: '16 / 10' }}
+              data-reveal=""
+            >
+              <Image
+                src={detail.src}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="scale-[1.6] object-cover"
+                style={{ objectPosition: '50% 55%' }}
+              />
+            </div>
+          )}
+        </section>
       </div>
 
-      <section aria-label="Información del producto" className="container-site mt-20 grid gap-10 lg:mt-28 lg:grid-cols-2 lg:gap-16">
-        <ProductTabs product={product} />
-        {detail && (
-          <div className="relative overflow-hidden rounded-2xl bg-crema" style={{ aspectRatio: '16 / 10' }} data-reveal="">
-            <Image
-              src={detail.src}
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="scale-[1.6] object-cover"
-              style={{ objectPosition: '50% 55%' }}
-            />
-          </div>
-        )}
-      </section>
-
       {related.length > 0 && (
-        <section aria-labelledby="relacionados-titulo" className="container-site mt-24 lg:mt-32">
+        <section aria-labelledby="relacionados-titulo" className="container-site mt-12 lg:mt-32">
           <ProductCarousel
             products={related}
             label="Productos relacionados"
@@ -75,7 +89,10 @@ export default async function ProductPage(props: PageProps<'/producto/[slug]'>) 
                 >
                   También te puede gustar
                 </h2>
-                <Link href={category.href} className="label mt-3 inline-flex items-center gap-2 text-cafe hover:text-negro">
+                <Link
+                  href={category.href}
+                  className="label mt-3 inline-flex items-center gap-2 text-cafe hover:text-negro"
+                >
                   Ver todo en {category.label.toLowerCase()} <ArrowIcon size={16} />
                 </Link>
               </>
