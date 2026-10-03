@@ -5,7 +5,7 @@ import { looks, showcase } from '@/data/looks';
 import { getFeatured, getOnSale, getProduct, getProductsByCategory, type Product } from '@/data/products';
 import { site } from '@/data/site';
 import { waGeneralUrl } from '@/lib/whatsapp';
-import { HomeHero } from '@/components/sections/HomeHero';
+import { HeroOrbit } from '@/components/sections/HeroOrbit';
 import { MobileHome } from '@/components/sections/MobileHome';
 import { EditorialImage } from '@/components/ui/EditorialImage';
 import { ProductCarousel } from '@/components/product/ProductCarousel';
@@ -20,6 +20,16 @@ export default function HomePage() {
 
   const apparelAndJewelry = [...getProductsByCategory('ropa'), ...getProductsByCategory('joyeria')];
 
+  // Hero de escritorio: 20 fotos de producto alternando categorías.
+  const withPhoto = (list: Product[]) => list.filter((p) => p.images.length > 0);
+  const lingerie = withPhoto(getProductsByCategory('lenceria'));
+  const others = withPhoto(apparelAndJewelry);
+  const heroProducts: Product[] = [];
+  for (let i = 0; heroProducts.length < 20 && (i < lingerie.length || i < others.length); i++) {
+    if (lingerie[i]) heroProducts.push(lingerie[i]);
+    if (others[i] && heroProducts.length < 20) heroProducts.push(others[i]);
+  }
+
   return (
     <>
       {/* H1 único de la portada: solo para buscadores y lectores de pantalla */}
@@ -30,7 +40,7 @@ export default function HomePage() {
 
       {/* Escritorio */}
       <div className="hidden lg:block">
-        <HomeHero />
+        <HeroOrbit products={heroProducts} />
 
         {/* Beneficios */}
         <section aria-label="Beneficios" className="border-y border-linea bg-crema">

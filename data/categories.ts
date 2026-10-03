@@ -74,52 +74,6 @@ export const categories: Record<Category, CategoryInfo> = {
 
 export const categoryList: CategoryInfo[] = [categories.lenceria, categories.ropa, categories.joyeria];
 
-/** Capítulos del hero de la portada */
-export type HeroChapter = {
-  index: string;
-  category: Category;
-  label: string;
-  /** 1 foto a todo el ancho, o 2 verticales en díptico (en móvil solo la primera) */
-  images: EditorialId[];
-  title: string;
-  text: string;
-  cta: string;
-  href: string;
-};
-
-export const heroChapters: HeroChapter[] = [
-  {
-    index: '01',
-    category: 'lenceria',
-    label: 'LENCERÍA',
-    images: ['04'],
-    title: 'Comodidad que se siente tuya',
-    text: 'Sostenes, bralettes, bodies y calzones de encaje fabricados en Colombia, pensados para un calce perfecto.',
-    cta: 'Ver lencería',
-    href: '/lenceria',
-  },
-  {
-    index: '02',
-    category: 'ropa',
-    label: 'ROPA',
-    images: ['08', '09'],
-    title: 'Prendas que no pasan de moda',
-    text: 'Básicos y piezas atemporales para vestir con elegancia todos los días.',
-    cta: 'Ver ropa',
-    href: '/ropa',
-  },
-  {
-    index: '03',
-    category: 'joyeria',
-    label: 'JOYERÍA',
-    images: ['14'],
-    title: 'El detalle que completa tu look',
-    text: 'Collares, aros y accesorios con diseños exclusivos y piezas hechas a mano.',
-    cta: 'Ver joyería',
-    href: '/joyeria',
-  },
-];
-
 /** Enlaces del menú principal */
 export const mainNav = [
   { href: '/lenceria', label: 'LENCERÍA', title: 'Lencería' },
