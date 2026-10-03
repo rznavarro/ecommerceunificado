@@ -1,6 +1,5 @@
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { Footer } from '@/components/layout/Footer';
-import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 import { CartHydrator } from '@/components/layout/CartHydrator';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { ImageReveal } from '@/components/layout/ImageReveal';
@@ -19,7 +18,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <main id="contenido">{children}</main>
       <Footer />
-      <WhatsAppFloat />
       <CartDrawer />
       <ImageReveal />
       <MobileNav />

@@ -21,7 +21,6 @@
   --header-h: 64px;
   --chrome-h: calc(var(--topbar-h) + var(--header-h));
   --gutter: 20px;
-  --float-offset: 0px;
 }
 
 /* Móvil: sin barra superior; barra de navegación inferior (MobileNav) */
@@ -33,7 +32,6 @@
 @media (max-width: 1023px) {
   :root {
     --mobile-nav-h: 68px;
-    --float-offset: calc(var(--mobile-nav-h) + 8px);
   }
 }
 
@@ -257,7 +255,7 @@ body {
   }
 }
 
-/* Aparición del botón flotante de WhatsApp (1 s) */
+/* Aparición suave (menú móvil, fotos de la galería) */
 @keyframes float-in {
   from {
     opacity: 0;
@@ -267,9 +265,6 @@ body {
     opacity: 1;
     transform: none;
   }
-}
-.wa-float {
-  animation: float-in 0.5s ease-out 1s both;
 }
 
 @media (prefers-reduced-motion: reduce) {
